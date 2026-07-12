@@ -1,0 +1,16 @@
+{
+  "version": "0.1",
+  "label": "PearlVolt Miner",
+  "image": "nvidia/cuda:12.8.0-runtime-ubuntu22.04",
+  "entrypoint": "/bin/bash",
+  "args": ["/workspace/deploy/vast-ai.sh"],
+  "env": {
+    "WALLET": "prl1YOUR_WALLET_ADDRESS",
+    "POOL": "stratum+tcp://pool.pearlvolt.run:4141",
+    "GPUS": "all"
+  },
+  "gpu_requirements": {
+    "min_gpu_count": 1,
+    "gpu_types": ["H100", "H200"]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "name": "PearlVolt Miner",
+  "image_name": "nvidia/cuda:12.8.0-runtime-ubuntu22.04",
+  "docker_start_cmd": "bash /workspace/deploy/runpod.sh",
+  "container_start": "bash /workspace/deploy/runpod.sh",
+  "env": [
+    {"key": "WALLET", "value": "prl1YOUR_WALLET_ADDRESS"},
+    {"key": "POOL", "value": "stratum+tcp://pool.pearlvolt.run:4141"},
+    {"key": "GPUS", "value": "all"}
+  ],
+  "gpu_type": "H100 80GB",
+  "gpu_count": 1
+}
