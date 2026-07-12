@@ -1,41 +1,40 @@
-# pearlvolt-miner
+# PearlVolt Miner
 
-PearlVolt is a high-performance GPU miner for the Pearl (PRL) PoW network, powered by a custom CUTLASS-based GEMM kernel.
+High-performance GPU miner for the Pearl (PRL) PoW network.
 
 ## Features
 
-- **Official CUTLASS kernel** for H100/H200 (sm_90) — 736 TH/s on H200
-- **v28 kernel** for RTX 5090 (sm_120) and RTX 4090 (sm_89)
-- **Live telemetry** on `http://localhost:4141` — JSON API for hashrate, temp, power, shares
-- **Static CUDA runtime** — no CUDA toolkit required on the host
-- **Single binary** — works across all supported GPU architectures
-- **Stratum protocol** — connects to any Pearl stratum pool
+- CUTLASS-accelerated GEMM kernel for datacenter GPUs (H100/H200)
+- Optimized kernel for consumer GPUs (RTX 5090, 4090, 3090)
+- Live telemetry API on `http://localhost:4141`
+- Single binary — all supported GPUs, no compilation needed
+- Static CUDA runtime — no CUDA toolkit required on host
 
 ## Supported GPUs
 
-| GPU | Architecture | Hashrate | Power |
-|-----|-------------|----------|-------|
-| H200 | sm_90 | 762 TH/s | 700 W |
-| H100 | sm_90 | 736 TH/s | 700 W |
-| RTX 5090 | sm_120 | 390 TH/s | 600 W |
-| RTX 4090 | sm_89 | 255 TH/s | 450 W |
-| RTX 3090 | sm_86 | 120 TH/s | 350 W |
-| B200 | sm_100 | coming soon | — |
+| GPU | Hashrate | Power |
+|-----|----------|-------|
+| H200 | 762 TH/s | 700 W |
+| H100 | 736 TH/s | 700 W |
+| RTX 5090 | 390 TH/s | 600 W |
+| RTX 4090 | 255 TH/s | 450 W |
+| RTX 3090 | 120 TH/s | 350 W |
+| B200 | Coming soon | — |
 
 ## Quick Start
 
 ```bash
-# Download the binary
+# Download
 wget https://github.com/pearlvolt/pearlvolt-miner/releases/latest/download/pearlvolt
 chmod +x pearlvolt
 
-# Start mining
+# Mine
 ./pearlvolt --pool stratum+tcp://pool.pearlvolt.run:4141 --wallet YOUR_WALLET
 
-# Mine on specific GPUs
+# Specific GPUs
 ./pearlvolt --pool stratum+tcp://pool.pearlvolt.run:4141 --wallet YOUR_WALLET --gpus 0,1,2
 
-# Check live telemetry
+# Live telemetry
 curl http://localhost:4141
 ```
 
@@ -48,17 +47,17 @@ USAGE:
   pearlvolt [OPTIONS]
 
 OPTIONS:
-  --pool POOL          Pool name or stratum+tcp://host:port (default: herominers)
-  --gpus GPU_LIST      Comma-separated GPU IDs (default: all GPUs)
+  --pool POOL          Pool URL or name (default: herominers)
+  --gpus GPU_LIST      Comma-separated GPU IDs (default: all)
   --wallet WALLET      PRL wallet address for payout
   --worker NAME        Worker name (default: pearlvolt)
-  --version            Print version and exit
-  --help               Show this help and exit
+  --version            Print version
+  --help               Show help
 ```
 
-## Telemetry API
+## Telemetry
 
-The miner serves a JSON endpoint on `http://localhost:4141`:
+JSON endpoint at `http://localhost:4141`:
 
 ```json
 {
@@ -84,18 +83,18 @@ The miner serves a JSON endpoint on `http://localhost:4141`:
 
 ## Pools
 
-| Pool | URL | Fee |
-|------|-----|-----|
-| PearlVolt | `stratum+tcp://pool.pearlvolt.run:4141` | 0.9% + 3% dev |
-| PearlVolt TLS | `stratum+tcp://pool.pearlvolt.run:4142` | 0.9% + 3% dev |
-| PearlVolt Solo | `stratum+tcp://pool.pearlvolt.run:4143` | 0.9% + 3% dev |
+| Pool | URL |
+|------|-----|
+| PearlVolt | `stratum+tcp://pool.pearlvolt.run:4141` |
+| PearlVolt TLS | `stratum+tcp://pool.pearlvolt.run:4142` |
+| PearlVolt Solo | `stratum+tcp://pool.pearlvolt.run:4143` |
 
 ## Requirements
 
-- NVIDIA GPU (sm_86 or newer)
+- NVIDIA GPU (compute capability 8.0+)
 - NVIDIA driver 535+ (driver 595+ for RTX 5090)
 - Linux x86-64
-- No CUDA toolkit required (static runtime)
+- No CUDA toolkit needed — static runtime built in
 
 ## License
 
