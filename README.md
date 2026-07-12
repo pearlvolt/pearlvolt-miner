@@ -1,6 +1,7 @@
 # PearlVolt Miner
 
 🌐 https://pearlvolt.run
+💬 Discord: https://discord.gg/ZRSBaSMtg
 
 High-performance GPU miner for the Pearl (PRL) PoW network.
 
