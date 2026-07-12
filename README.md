@@ -1,5 +1,7 @@
 # PearlVolt Miner
 
+🌐 https://pearlvolt.run
+
 High-performance GPU miner for the Pearl (PRL) PoW network.
 
 ## Features
